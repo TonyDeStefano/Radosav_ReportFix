@@ -14,9 +14,8 @@ class Collection extends \Magento\Reports\Model\ResourceModel\Quote\Item\Collect
         }
         $productData = $this->getProductData($productIds);
         $orderData = $this->getOrdersData($productIds);
-        $existing = $this->productResource->getAllIds();
         foreach ($items as $item) {
-            if(in_array($item->getProductId(),$existing)){
+            if(!isset($productData[$item->getProductId()])){
                 continue;
             }
             $item->setId($item->getProductId());
@@ -31,5 +30,3 @@ class Collection extends \Magento\Reports\Model\ResourceModel\Quote\Item\Collect
         return $this;
     }
 }
-	
-	
